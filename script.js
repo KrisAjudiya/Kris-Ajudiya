@@ -718,7 +718,8 @@ class GearSystem {
 // Project Filter System
 class ProjectFilter {
     constructor() {
-        this.projects = document.querySelectorAll('.project-card');
+        this.projectsSection = document.querySelector('#projects .container');
+        this.projects = document.querySelectorAll('#projects .project-card');
         this.init();
     }
 
@@ -728,7 +729,8 @@ class ProjectFilter {
     }
 
     createFilterButtons() {
-        const projectsSection = document.querySelector('.projects .container');
+        const projectsSection = this.projectsSection;
+        if (!projectsSection) return;
         const filterContainer = document.createElement('div');
         filterContainer.className = 'project-filters';
         filterContainer.style.cssText = `
@@ -765,7 +767,8 @@ class ProjectFilter {
     }
 
     bindEvents() {
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        if (!this.projectsSection) return;
+        const filterButtons = this.projectsSection.querySelectorAll('.filter-btn');
         
         filterButtons.forEach(button => {
             button.addEventListener('click', () => this.handleFilter(button));
@@ -773,7 +776,8 @@ class ProjectFilter {
     }
 
     handleFilter(activeButton) {
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        if (!this.projectsSection) return;
+        const filterButtons = this.projectsSection.querySelectorAll('.filter-btn');
         const filter = activeButton.dataset.filter;
         
         // Update active button
